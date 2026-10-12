@@ -13,7 +13,7 @@ jobs:
           node-version: '22.11.0'
       - run: echo '5fdd48f87e703eedff1fb128843c0762a40afe6ef146c67e3f000ffec9c7091a  max-launcher-source.zip' | sha256sum --check --strict
       - run: |
-          python3 -c "import zipfile; z=zipfile.ZipFile('max-launcher-source.zip'); [setattr(i,'filename',i.filename.replace(chr(92),'/')) for i in z.infolist()]; z.extractall('app')"
+          python3 -c "import zipfile; z=zipfile.ZipFile('max-launcher-source.zip'); [setattr(i,'filename',i.filename.replace(chr(92),'/')) for i in z.infolist()]; z.extractall('app',members=z.infolist())"
       - run: npm ci
         working-directory: app
       - run: npm test
